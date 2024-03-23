@@ -1,0 +1,35 @@
+.imgStyle{
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    object-position: center;
+}
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.hrStyles{
+    width: 60px;
+    background-color: rgb(211, 211, 211);
+    height: 2px;
+}
+
+
+.imgStyleRRSS{
+    width: 30px;
+    height: 30px;
+    margin-left: 0px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.colorUpDown{
+    background-color: rgb(27, 27, 27);
+    margin-top: 20px;
+}
+
+p{
+    margin-top: 11px;
+}

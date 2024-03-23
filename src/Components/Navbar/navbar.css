@@ -1,0 +1,98 @@
+.container{
+	max-width: 100%;
+	padding-right: 0px;
+    padding-left: 0px;
+}
+
+.navbar{
+	padding: 10px;
+	padding-bottom: 0px;
+}
+
+.ftco-section{
+	margin-bottom: 20px;
+}
+	.img {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+
+	.active{
+		color: crimson !important;
+		border-bottom: solid 2px crimson;
+		width: 100%;
+	}
+
+	.ftco-navbar-light {
+		background: rgb(17, 17, 17) !important;
+		-webkit-box-shadow: 0px 5px 20px -17px rgba(0, 0, 0, 0.34);
+		-moz-box-shadow: 0px 5px 20px -17px rgba(0, 0, 0, 0.34);
+		box-shadow: 0px 5px 20px -17px red;
+	}
+	.ftco-navbar-light .navbar-brand {
+		color: rgb(211, 211, 211);
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+	.ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+		font-size: 14px;
+		padding-top: 1.2rem;
+		padding-bottom: 1.2rem;
+		padding-left: 20px;
+		padding-right: 20px;
+		font-weight: 400;
+		color: rgb(211, 211, 211);
+	}
+	.ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
+		color: rgb(143, 15, 40);
+		width: 100%;
+	}
+	.ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu {
+		border: none;
+		-webkit-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+		-moz-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+		box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+		border-radius: 4px;
+		padding: 0px;
+	}
+	.ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu .dropdown-item {
+		font-size: 12px;
+		color: rgb(211, 211, 211);
+	}
+	.ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu .dropdown-item:hover, .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu .dropdown-item:focus {
+		background: crimson;
+	}
+	.ftco-navbar-light .navbar-nav > .nav-item.cta > a {
+		color: rgb(211, 211, 211);
+		background: crimson;
+		border-radius: 0px;
+	}
+	.ftco-navbar-light .navbar-nav > .nav-item.active > a {
+		color: crimson;
+	}
+	.ftco-navbar-light .navbar-toggler {
+		border: none;
+		color: rgb(211, 211, 211) !important;
+		cursor: pointer;
+		padding-right: 0px;
+		text-transform: uppercase;
+		font-size: 16px;
+		letter-spacing: 0.1em;
+	}
+	.ftco-navbar-light .navbar-toggler:focus {
+		outline: none !important;
+	}
+
+	#menuT{
+		width: 30px;
+		height: 30px;
+	}
+
+
+
+	@media (max-width:991px) {
+		.nav-item{
+			text-align: center;
+		}
+	}

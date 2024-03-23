@@ -1,0 +1,12 @@
+.dPrices{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.dStylePrices{
+    font-size: 16px;
+    font-weight: 500
+}
