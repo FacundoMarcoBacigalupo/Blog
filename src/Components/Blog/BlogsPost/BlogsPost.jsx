@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import notFound from "../../../Assets/notFound.png"
+import notFound from "../../../Assets/img/notFound.png"
 import { useState } from 'react';
 import "./blogsPost.css"
 

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import house from "../../Assets/home.png"
-import mail from "../../Assets/email.png"
-import phone from "../../Assets/phone.png"
-import mercadoPago from "../../Assets/mercadoPago.png"
+import house from "../../Assets/img/home.png"
+import mail from "../../Assets/img/email.png"
+import phone from "../../Assets/img/phone.png"
+import mercadoPago from "../../Assets/img/mercadoPago.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore"

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import UP from "../../Assets/up.png"
+import UP from "../../Assets/img/up.png"
 import "./buttonUp.css";
 
 

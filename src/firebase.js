@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
+import { getAuth } from "firebase/auth"
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from "uuid";
 
@@ -15,11 +16,13 @@ const firebaseConfig = {
 }  
 
 
-// Initialize Firebase
+// Inicio de Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 
 
+
+//Subir imagenes a Firebase
 export const storage = getStorage(app)
 const storageRef = ref(storage, `picturesPosts/${v4()}`)
 
@@ -32,3 +35,7 @@ export async function getFile(filePath){
     const url = await getDownloadURL(fileRef);
     return url;
 }
+
+
+//Autenticacion de usuarios a Firebase
+export const auth = getAuth(app);
