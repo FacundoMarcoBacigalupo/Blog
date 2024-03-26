@@ -90,6 +90,26 @@
 	}
 
 
+.btnContainer{
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+.btnNavBar{
+	background-color: crimson;
+	padding: 5px;
+	color: #f7f7f7;
+	text-align: center;
+	margin-top: 0px;
+	border: 1px solid crimson;
+	margin: 20px;
+}
+.btnNavBar:hover{
+	transition: all .6s;
+	background-color: rgb(17, 17, 17)
+}
+
+
 
 	@media (max-width:991px) {
 		.nav-item{

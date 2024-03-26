@@ -1,19 +1,19 @@
 import Router from "./Routers/Router.jsx"
-import { Fragment } from "react";
 import Dolar from "./Components/Dolar/Dolar.jsx"
 import Weather from './Components/Weather/Weather.jsx';
+import AuthProvider from "./Context/AuthProvider.jsx";
 import './App.css';
 
 
 function App() {
   return (
-    <Fragment>
+    <AuthProvider>
       <div className="containerComponent">
         <Dolar />
         <Weather />
       </div>
       <Router />
-    </Fragment>
+    </AuthProvider>
   )
 }
 
