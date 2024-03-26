@@ -106,7 +106,7 @@ const CreatePost = () => {
                         onChange={handleInputChange}
                     />
 				</div>
-                <p>o</p>
+                <h3 style={{margin:"0px", padding:"0px", textAlign:"center"}}>o</h3>
                 <div>
                     <label htmlFor="picture">Foto del Post desde PC (recomendado HD)</label>
                     <input

@@ -1,0 +1,76 @@
+.containerLogin{
+    margin: 20px;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.styleForm{
+    width: 85%;
+	border-radius: 5px;
+	padding: 50px;
+	box-shadow: #1f1f1f 2px 5px 10px;
+	margin-top: 20px;
+    border: 1px solid crimson;
+}
+
+.styleForm h1{
+    color: #1f1f1f;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.styleForm > div {
+	margin-bottom: 20px;
+}
+
+
+.styleForm label {
+	display: block;
+	font-weight: 500;
+	font-size: 18px;
+	color: #1f1f1f;
+}
+
+
+.styleForm input{
+	width: 100%;
+	border-radius: 5px;
+	font-size: 18px;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 2px solid #e2e2e2;
+	color: #1f1f1f;
+}
+.styleForm input:focus {
+	outline: none;
+	border: 2px solid crimson;
+}
+
+
+.buttonChange{
+	display: block;
+	background: crimson;
+	font-weight: 600;
+	font-family: 'Open Sans', sans-serif;
+	border: none;
+	cursor: pointer;
+    margin: auto;
+	width: 85%;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 16px;
+	transition: .3s ease all;
+}
+
+.buttonChange:hover {
+	background: rgb(124, 11, 33);
+}
+
+.buttonChange:active {
+	scale: .9;
+    transition: all .4;
+}

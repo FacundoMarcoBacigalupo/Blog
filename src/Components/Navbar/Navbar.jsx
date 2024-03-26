@@ -30,8 +30,10 @@ const navbar = () => {
                             </ul>
                             {
                             user && user.uid ? <div className="btnContainer">
-                                <button className="btnNavBar" onClick={() => signOut(auth)}>Cerrar sesion</button>
-                            </div> : <li className="nav-item"><NavLink  to="/login" className="nav-link" style={{color:"#fff"}}>Login</NavLink></li>
+                                    <button className="btnNavBar" onClick={() => signOut(auth)}>Cerrar sesion</button>
+                                </div> : <ul className="navbar-nav ml-auto mr-md-3">
+                                            <li className="nav-item"><NavLink to="/login" className="nav-link">Login</NavLink></li>
+                                        </ul>
                             }
                         </div>
                     </div>

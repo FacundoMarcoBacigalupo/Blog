@@ -14,7 +14,6 @@ const LoginForm = () => {
 
     const navigate = useNavigate();
 
-
     const handleSubmit = async(e) =>{
         try {
             e.preventDefault();
@@ -50,15 +49,14 @@ const LoginForm = () => {
 
 
     return (
-        <div className="con">
-            <div className="container">
-                <form className="formLogin" onSubmit={handleSubmit}>
-                    <div className="text">
-                        { isRegister ? "Registrate" : "Inicia sesion" }
-                    </div>              
+        <>
+            <div className="containerLogin">
+                <form className="styleForm" onSubmit={handleSubmit}>
+                    <h1>{ isRegister ? "Registrate" : "Inicia sesion" }</h1>         
                     
-                    <div className="form-row">
-                        <div className="input-data">
+                    <div>
+                        <div>
+                            <label>Email</label>
                             <input
                                 type="email"
                                 name="email"
@@ -67,14 +65,12 @@ const LoginForm = () => {
                                 autoComplete="off"
                                 required
                                 value={userEmail}
-                                className="inputLogin"
                                 onChange={(e) => setUserEmail(e.target.value)}
                             />
-                            <div className="underline"></div>
-                            <label>Email</label>
                         </div>
                         
-                        <div className="input-data">
+                        <div>
+                            <label>Contraseña</label>
                             <input
                                 type="password"
                                 name="password"
@@ -85,19 +81,17 @@ const LoginForm = () => {
                                 value={userPassword}
                                 onChange={(e) => setUserPassword(e.target.value)}
                             />
-                            <div className="underline"></div>
-                            <label>Contraseña</label>
                         </div>
                     </div>
                     
-                    <button type="submit">{ isRegister ? "Registrate" : "Inicia sesion" }</button>
+                    <button className="buttonChange" type="submit">{ isRegister ? "Registrate" : "Inicia sesion" }</button>
                 </form>
             </div>
-            
-            <button onClick={() => setIsRegister(!isRegister)}>
+            <br />
+            <button className="buttonChange" onClick={() => setIsRegister(!isRegister)}>
                 { isRegister ? "Ya tengo una cuenta" : "Quiero registrarme" }
             </button>
-        </div>
+        </>
     )
 }
 
