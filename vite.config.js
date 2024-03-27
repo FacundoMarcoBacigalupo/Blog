@@ -1,32 +1,23 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
-// import commonjs from 'rollup-plugin-commonjs'
+import { createRequire } from 'node:module';
+const require = createRequire( import.meta.url );
 
-
-// export default defineConfig({
-//   plugins: [
-//     react(),
-//     commonjs()
-//   ],
-//   base:"https://facundomarcobacigalupo.github.io/Blog",
-//   build: {
-//     commonjsOptions: {
-//       include: [/@workspace\/ckeditor5-custom-build/, /node_modules/],
-//       exclude: ['ckeditor5-custom-build']
-//     }
-//   },
-//   optimizeDeps: {
-//     include: ['@workspace/ckeditor5-custom-build','ckeditor5-custom-build']
-//   }
-// })
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import ckeditor5 from '@ckeditor/vite-plugin-ckeditor5'
+
 
 export default defineConfig({
   plugins: [
-    react()
+    react(),
+    ckeditor5( { theme: require.resolve( '@ckeditor/ckeditor5-theme-lark' ) } )
   ],
-  base: "https://facundomarcobacigalupo.github.io/Blog",
+  base:"https://facundomarcobacigalupo.github.io/Blog",
+  build: {
+    commonjsOptions: {
+      include: [/@workspace\/ckeditor5-custom-build/, /node_modules/],
+      exclude: ['ckeditor5-custom-build']
+    }
+  },
   optimizeDeps: {
     include: ['@workspace/ckeditor5-custom-build','ckeditor5-custom-build']
   }
