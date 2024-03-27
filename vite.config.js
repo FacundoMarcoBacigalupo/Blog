@@ -5,16 +5,13 @@ import commonjs from 'rollup-plugin-commonjs'
 
 export default defineConfig({
   plugins: [
-    [react()],
-    commonjs(),
-    // vue()
+    react(),
+    commonjs()
   ],
   build: {
     commonjsOptions: {
       include: [/@workspace\/ckeditor5-custom-build/, /node_modules/],
-      exclude: [
-        'ckeditor5-custom-build', 
-      ]
+      exclude: ['ckeditor5-custom-build']
     }
   },
   optimizeDeps: {
