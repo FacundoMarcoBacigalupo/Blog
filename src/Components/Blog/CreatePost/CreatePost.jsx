@@ -123,10 +123,6 @@ const CreatePost = () => {
                         editor={ClassicEditor}
                         data={entry.content}
                         onChange={handleChange}
-                        
-                        config={ {
-                            removePlugins: [ 'MediaEmbed', "EasyImage", "ImageUpload" ]
-                        } }
                     />
 				</div>
                     
