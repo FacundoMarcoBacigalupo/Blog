@@ -11,6 +11,7 @@ export default defineConfig({
     react(),
     ckeditor5( { theme: require.resolve( '@ckeditor/ckeditor5-theme-lark' ) } )
   ],
+  base:"https://facundomarcobacigalupo.github.io/Blog/",
   build: {
     commonjsOptions: {
       include: [/@workspace\/ckeditor5-custom-build/, /node_modules/],
