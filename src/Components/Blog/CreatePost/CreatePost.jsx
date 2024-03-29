@@ -1,10 +1,9 @@
-import Editor from 'ckeditor5-custom-build';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db, getFile, uploadFile } from '../../../firebase.js';
 import "./createPost.css";
-
 
 
 const CreatePost = () => {
@@ -72,7 +71,7 @@ const CreatePost = () => {
         <div className='containerForm'>
 			<form onSubmit={handleSubmit} className="formulario">
 				<div>
-                    <label htmlFor="title">Titulo del Post</label>
+                    <label>Titulo del Post</label>
                     <input
                         type="text"
                         name='title'
@@ -84,7 +83,7 @@ const CreatePost = () => {
 				</div>
                 
                 <div>
-                    <label htmlFor="summary">Resumen del Post</label>
+                    <label>Resumen del Post</label>
                     <input
                         type="text"
                         name='summary'
@@ -96,7 +95,7 @@ const CreatePost = () => {
 				</div>
                 
                 <div>
-                    <label htmlFor="picture">Foto del Post URL (recomendado HD)</label>
+                    <label>Foto del Post URL (recomendado HD)</label>
                     <input
                         type="text"
                         name='picture'
@@ -108,7 +107,7 @@ const CreatePost = () => {
 				</div>
                 <h3 style={{margin:"0px", padding:"0px", textAlign:"center"}}>o</h3>
                 <div>
-                    <label htmlFor="picture">Foto del Post desde PC (recomendado HD)</label>
+                    <label>Foto del Post desde PC (recomendado HD)</label>
                     <input
                         type="file"
                         name='picture'
@@ -119,14 +118,18 @@ const CreatePost = () => {
 				</div>
                 
 				<div>
-                    <label htmlFor="content">Contenido del Post</label>
+                    <label>Contenido del Post</label>
                     <CKEditor
-                        editor={Editor}
+                        editor={ClassicEditor}
                         data={entry.content}
                         onChange={handleChange}
+                        
+                        config={ {
+                            removePlugins: [ 'MediaEmbed', "EasyImage", "ImageUpload" ]
+                        } }
                     />
 				</div>
-                
+                    
 				<button type="submit">Crear Post</button>
 			</form>
 		</div>
