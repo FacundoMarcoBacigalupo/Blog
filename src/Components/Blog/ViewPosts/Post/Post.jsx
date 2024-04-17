@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./post.css"
 
-
 const Post = ({ id, title, summary, picture, content }) => {
     return (
         <div key={id} className="containerPost">
