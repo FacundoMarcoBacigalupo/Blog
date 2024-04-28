@@ -7,6 +7,7 @@ import ViewPost from "../Components/Blog/ViewPosts/ViewPosts.jsx"
 import ButtonUp from "../Components/ButtonUp/ButtonUp.jsx"
 import LoginForm from "../Components/Login/LoginForm.jsx";
 import ProtectedRouter from "../Assets/utils/ProtectedRouter.jsx"
+import ViewProfile from "../Components/ViewProfile/ViewProfile.jsx"
 
 
 const Router = () => {
@@ -22,6 +23,8 @@ const Router = () => {
                     </Route>
                     
                     <Route exact path="/login" element={<LoginForm/>} />
+                    
+                    <Route exact path="/profile/:userId" element={<ViewProfile/>} />
                     
                     <Route path='*' element={<h1>Error 404</h1>} />
                 </Routes>

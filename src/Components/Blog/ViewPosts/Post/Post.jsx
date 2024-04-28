@@ -1,7 +1,16 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
+import notFound from "../../../../Assets/img/notFound.png"
 import "./post.css"
 
 const Post = ({ id, title, summary, picture, content }) => {
+    const [imgSrc, setImgSrc] = useState(picture);
+
+    const handleImageError = () => {
+        setImgSrc(notFound);
+    };
+
+
     return (
         <div key={id} className="containerPost">
             <header>
@@ -10,7 +19,7 @@ const Post = ({ id, title, summary, picture, content }) => {
             </header>
             
             <picture className="postPicture">
-                <img src={ picture } alt={`${title}-img`} />
+                <img src={ imgSrc } onError={handleImageError} alt={`${title}-img`} />
             </picture>
             
             <hr />

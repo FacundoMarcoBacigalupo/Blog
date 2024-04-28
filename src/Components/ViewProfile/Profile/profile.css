@@ -1,0 +1,19 @@
+.containerProfile{
+    text-align: center;
+    margin: 30px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border-left: 4px solid crimson;
+    border-right: 4px solid crimson;
+    box-shadow: 0px 0px 10px crimson;
+}
+
+.containerProfile h1{
+    margin-bottom: 50px;
+}
+
+
+
+span{
+    color: crimson;
+}

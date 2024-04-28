@@ -1,8 +1,6 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { auth, db } from "../../firebase.js"
-import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../Context/AuthProvider.jsx";
 import "./loginForm.css"
 
 
@@ -14,21 +12,24 @@ const LoginForm = () => {
 
     const navigate = useNavigate();
 
+    const { registerUser, loginUser } = useAuthContext()
+
+
     const handleSubmit = async(e) =>{
         try {
             e.preventDefault();
-            
-            if(isRegister === true){
-                await createUserWithEmailAndPassword(auth, userEmail, userPassword)
+            try {
+                if (isRegister) {
+                    await registerUser(userEmail, userPassword);
+                } else {
+                    await loginUser(userEmail, userPassword);
+                }
                 
-                const userRef = collection(db, "users");
-                await addDoc(userRef, { email: userEmail, rol: "user", });
+                navigate("/");
             }
-            else{
-                await signInWithEmailAndPassword(auth, userEmail, userPassword)
+            catch (error) {
+                console.log(error.message);
             }
-            
-            navigate("/");
         }
         catch (error) {
             console.log(error.message);
@@ -51,7 +52,7 @@ const LoginForm = () => {
     return (
         <>
             <div className="containerLogin">
-                <form className="styleForm" onSubmit={handleSubmit}>
+                <form className="styleForm" onSubmit={(e) => handleSubmit(e)}>
                     <h1>{ isRegister ? "Registrate" : "Inicia sesion" }</h1>         
                     
                     <div>

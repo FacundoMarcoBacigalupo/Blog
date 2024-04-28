@@ -4,6 +4,11 @@
     padding-left: 0px;
 }
 
+.container a {
+    color: rgb(211, 211, 211);
+    text-decoration: none;
+}
+
 .navbar{
 	padding: 10px;
 	padding-bottom: 0px;
@@ -90,11 +95,7 @@
 	}
 
 
-.btnContainer{
-	display: flex;
-	justify-content: center;
-	align-self: center;
-}
+
 .btnNavBar{
 	background-color: crimson;
 	padding: 5px;
@@ -108,6 +109,12 @@
 	transition: all .6s;
 	background-color: rgb(17, 17, 17)
 }
+
+
+
+
+
+
 
 
 
