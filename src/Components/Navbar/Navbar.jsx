@@ -26,7 +26,7 @@ const navbar = () => {
                                 {user != null && user.rol === "admin" && <li className="nav-item"><NavLink to="/publicar-post" className="nav-link">Crear Post</NavLink></li>}
                             </ul>
                             {
-                            user && user.uid ? <div>
+                            user && user.uid ? <div id="containerLogin">
                                     <button className="btnNavBar"><Link  to={`/profile/${user.uid}`} className="nav-link">Perfil</Link></button>
                                     <button className="btnNavBar" onClick={() => closeSesion(auth)}>Cerrar sesión</button>
                                 </div> : <ul className="navbar-nav ml-auto mr-md-3">
