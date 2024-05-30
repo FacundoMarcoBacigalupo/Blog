@@ -21,7 +21,8 @@ const LoginForm = () => {
             try {
                 if (isRegister) {
                     await registerUser(userEmail, userPassword);
-                } else {
+                }
+                else {
                     await loginUser(userEmail, userPassword);
                 }
                 
@@ -33,17 +34,21 @@ const LoginForm = () => {
         }
         catch (error) {
             console.log(error.message);
-            if(error.code === "auth/email-already-in-use"){
-                alert("El email ya se esta usando")
-            }
-            else if(error.code === "auth/invalid-email"){
-                alert("Email invalido")
-            }
-            else if(error.code === "auth/weak-password"){
-                alert("La contraseña es muy debil")
-            }
-            else if (error.code){
-                alert("Algo salio mal")
+            
+            switch(error.code){
+                case "auth/email-already-in-use": alert("El email ya se esta usando")
+                break;
+                
+                case "auth/invalid-email": alert("Email invalido")
+                break;
+                
+                case "auth/weak-password": alert("La contraseña es muy debil")
+                break;
+                
+                case "auth/too-many-requests": alert("Muchos intentos seguidos, inténtalo más tarde")
+                break;
+                
+                default: alert("Algo salio mal")
             }
         }
     }

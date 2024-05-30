@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
 
 
-    const registerUser = async (email, password) => {
+    const registerUser = async(email, password) => {
         try {
             // Registrar al usuario en Firebase Authentication
             await createUserWithEmailAndPassword(auth, email, password);
@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
     
 
 
-    const loginUser = async (email, password) => {
+    const loginUser = async(email, password) => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             
