@@ -28,6 +28,7 @@ const List = memo(function List({ blogEntries }){
     return prevProps.blogEntries.length === nextProps.blogEntries.length;
 });
 
+
 List.propTypes = {
     blogEntries: PropTypes.arrayOf(PropTypes.object).isRequired
 };

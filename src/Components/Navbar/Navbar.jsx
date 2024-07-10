@@ -14,7 +14,7 @@ const navbar = () => {
             <div className="container">
                 <nav className="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
                     <div className="container">
-                        <p id="styleLg" className="navbar-brand"><Link to="/">Cañuelas Te Escucha</Link></p>
+                        <p id="styleLg" className="navbar-brand"><Link to="/">IT Noticias</Link></p>
                         
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                                 <img id="menuT" src={menu} alt="menuTogle" />

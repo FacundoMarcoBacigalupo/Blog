@@ -32,6 +32,7 @@ const Blog = () => {
         return <Loading />
     }
 
+
     return (
         <div className="contenedor">
 			<List blogEntries={blogEntries}/>

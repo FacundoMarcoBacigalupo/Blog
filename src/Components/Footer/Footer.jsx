@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import house from "../../Assets/img/home.png"
 import mail from "../../Assets/img/email.png"
-import phone from "../../Assets/img/phone.png"
+import whatsapp from "../../Assets/img/whatsapp.png"
 import mercadoPago from "../../Assets/img/mercadoPago.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react";
@@ -31,10 +30,8 @@ const footer = () => {
             <footer className="text-center text-lg-start text-white" style={{backgroundColor:"rgb(17, 17, 17)"}}>
                 <section className="d-flex justify-content-center p-2 colorUpDown">
                     <p>
-                        Se puede donar mediante Mercado Pago, <span className="text-danger">CVU: 0000003100004037602282</span>
-                        <a href="https://mpago.la/32wtK5Y" target="_blank" rel="noopener noreferrer">
-                            <img className="imgStyleRRSS" src={mercadoPago} alt="Mercado Pago" />
-                        </a> Muchas Gracias.
+                        Se puede donar mediante Mercado Pago, <span className="text-danger">CVU: 0000003100074067148557</span>
+                        <img className="imgStyleRRSS" src={mercadoPago} alt="Mercado Pago" /> Muchas Gracias.
                     </p>
                 </section>
             
@@ -46,9 +43,9 @@ const footer = () => {
             
                     {/* Grid column */}
                     <div className="col-md-3 col-lg-4 col-xl-3 mx-auto">
-                        <h6 className="text-uppercase fw-bold">Cañuelas Te Escucha</h6>
+                        <h6 className="text-uppercase fw-bold">IT Noticias</h6>
                         <hr className="mb-3 mt-0 d-inline-block mx-auto hrStyles" />
-                        <p>Escuchamos la verdad de los cañuelenses.</p>
+                        <p>Noticias de todo tipo sobre el mundo IT.</p>
                     </div>
                     {/* Grid column */}
             
@@ -71,9 +68,8 @@ const footer = () => {
                     <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0">
                         <h6 className="text-uppercase fw-bold">Contacto</h6>
                         <hr className="mb-3 mt-0 d-inline-block mx-auto hrStyles" />
-                        <p><img className="imgStyle" src={house} alt="house" /> Buenos aires, cañuelas</p>
-                        <p><img className="imgStyle" src={mail} alt="mail" /> micamarco@gmail.com</p>
-                        <p><img className="imgStyle" src={phone} alt="phone" /> +54 11 2252-4921</p>
+                        <p><img className="imgStyle" src={mail} alt="mail" /> marcofacundolucas@gmail.com</p>
+                        <p><img className="imgStyle" src={whatsapp} alt="whatsapp" /> +54 11 2739-8858</p>
                     </div>
                     {/* Grid column */}
                     </div>
@@ -82,7 +78,7 @@ const footer = () => {
                 </section>
             
                 <div className="text-center p-3 colorUpDown">
-                    <p className="text-white">© 2024 Copyright: Cañuelas Te Escucha</p>
+                    <p className="text-white">© 2024 Copyright: IT Noticias</p>
                 </div>
             </footer>
     )

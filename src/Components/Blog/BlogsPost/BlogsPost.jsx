@@ -21,13 +21,14 @@ const BlogsPost = ({ id, title, summary, picture }) => {
                 <div className="card-body">
                     <h2 className="card-title">{ title }</h2>
                     <p className="card-description">
-                        { `${summary.substring(0, 80)}.` }
+                        { `${summary.substring(0, 100)}.` }
                     </p>
                     <Link className="btn" to={`/post/${id}`}>Leer mas</Link>
                 </div>
             </section>
     );
 };
+
 BlogsPost.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

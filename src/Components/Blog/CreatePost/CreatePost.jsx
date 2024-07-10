@@ -1,8 +1,7 @@
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db, getFile, uploadFile } from '../../../firebase.js';
+import { Editor } from '@tinymce/tinymce-react';
 import "./createPost.css";
 
 
@@ -12,8 +11,9 @@ const CreatePost = () => {
     const [fileImg, setFileImg] = useState(null)
 
 
-    const handleChange = (event, editor) => {
-        const data = editor.getData();
+    const editorRef = useRef(null);
+    const handleChange = () => {
+        const data = editorRef.current.getContent();
         setEntry({ ...entry, content: data });
     };
 
@@ -105,7 +105,7 @@ const CreatePost = () => {
                         onChange={handleInputChange}
                     />
 				</div>
-                <h3 style={{margin:"0px", padding:"0px", textAlign:"center"}}>o</h3>
+                <h3 id='o'>O</h3>
                 <div>
                     <label>Foto del Post desde PC (recomendado HD)</label>
                     <input
@@ -119,17 +119,28 @@ const CreatePost = () => {
                 
 				<div>
                     <label>Contenido del Post</label>
-                    <CKEditor
-                        editor={ClassicEditor}
-                        data={entry.content}
+                    <Editor
+                        apiKey='730dnxdvv8a2ytisj1v0b9qvktuh9xxfxb2qabsg2lv2n4uw'
+                        onInit={(_evt, editor) => editorRef.current = editor}
+                        init={{
+                        height: 500,
+                        menubar: false,
+                        branding: false,
+                        statusbar: false,
+                        plugins: [
+                            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'autosave'
+                        ],
+                        toolbar: 'undo redo | blocks | ' +
+                            'bold italic underline forecolor | alignleft aligncenter ' +
+                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                            'removeformat | image | wordcount',
+                        }}
                         onChange={handleChange}
-                        
-                        config={ {
-                            removePlugins: [ 'MediaEmbed', "EasyImage", "ImageUpload" ]
-                        } }
                     />
 				</div>
-                    
+                
 				<button type="submit">Crear Post</button>
 			</form>
 		</div>
