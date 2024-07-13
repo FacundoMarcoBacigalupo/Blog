@@ -11,7 +11,6 @@ const AuthContext = React.createContext([]);
 export const useAuthContext = () => useContext(AuthContext);
 
 
-
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
 
@@ -103,7 +102,6 @@ const AuthProvider = ({ children }) => {
 
 
 
-
         useEffect(() => {
             const updateUserRole = async () => {
                 if (user) {
@@ -117,7 +115,6 @@ const AuthProvider = ({ children }) => {
                 updateUserRole();
             }
         }, [user, getRol]);
-
 
 
 

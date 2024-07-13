@@ -1,5 +1,7 @@
 .card{
   height: 400px;
+  margin: 15px;
+  box-shadow: rgb(17, 17, 17) 0px 0px 8px;
 }
 .card:hover{
   border: solid 1px crimson;
@@ -41,7 +43,7 @@
 .card-body{
   background-color: #fff;
   padding: 20px 15px;
-  text-align: justify;
+  text-align:left;
 }
 
 

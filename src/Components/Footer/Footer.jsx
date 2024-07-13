@@ -34,13 +34,13 @@ const footer = () => {
                         <img className="imgStyleRRSS" src={mercadoPago} alt="Mercado Pago" /> Muchas Gracias.
                     </p>
                 </section>
-            
-            
+                
+                
                 <section>
                 <div className="container text-center text-md-start mt-5">
                     {/* Grid row  */}
                     <div className="row mt-3">
-            
+                    
                     {/* Grid column */}
                     <div className="col-md-3 col-lg-4 col-xl-3 mx-auto">
                         <h6 className="text-uppercase fw-bold">IT Noticias</h6>
@@ -48,7 +48,7 @@ const footer = () => {
                         <p>Noticias de todo tipo sobre el mundo IT.</p>
                     </div>
                     {/* Grid column */}
-            
+                    
                     {/* Grid column */}
                     <div className="col-md-2 col-lg-2 col-xl-2 mx-auto">
                         <h6 className="text-uppercase fw-bold">Ultimos blogs</h6>
@@ -62,8 +62,8 @@ const footer = () => {
                         }
                     </div>
                     {/* Grid column */}
-            
-            
+                    
+                    
                     {/* Grid column */}
                     <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0">
                         <h6 className="text-uppercase fw-bold">Contacto</h6>
@@ -76,7 +76,7 @@ const footer = () => {
                     {/* Grid row */}
                 </div>
                 </section>
-            
+                
                 <div className="text-center p-3 colorUpDown">
                     <p className="text-white">© 2024 Copyright: IT Noticias</p>
                 </div>
