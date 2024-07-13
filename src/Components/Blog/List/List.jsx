@@ -2,14 +2,20 @@
 import { Fragment, memo } from 'react'
 import BlogPost from "../BlogsPost/BlogsPost.jsx"
 import PropTypes from 'prop-types';
+import { useAuthContext } from '../../../Context/AuthProvider.jsx';
 
 
 
 const List = memo(function List({ blogEntries }){
+    const { categorySelected } = useAuthContext();
+
+	const filteredEntries = categorySelected
+		? blogEntries.filter((post) => post.category === categorySelected)
+		: blogEntries;
     return (
         <Fragment>
             {
-            blogEntries.map(data => {
+            filteredEntries.map(data => {
                 if(data && data.content){
                     return (
                         <article key={data.id}>

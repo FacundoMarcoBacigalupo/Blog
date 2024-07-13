@@ -11,7 +11,6 @@ const Blog = () => {
     const [blogEntries, setBlogEntries] = useState([])
 	const [loading, setLoading] = useState(true)
 
-
 	useEffect(() => {
 		setLoading(true)
 		
@@ -24,14 +23,12 @@ const Blog = () => {
 				setBlogEntries(response)
 			})
 			.catch(error => console.error(error))
-			
 			.finally(() => setLoading(false))
 	}, [])
 
 	if (loading){
         return <Loading />
     }
-
 
     return (
         <div className="contenedor">

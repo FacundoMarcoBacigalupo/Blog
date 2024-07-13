@@ -6,7 +6,7 @@ import "./createPost.css";
 
 
 const CreatePost = () => {
-    const [entry, setEntry] = useState({ title:"", content:"", picture:"", summary:"" })
+    const [entry, setEntry] = useState({ title:"", content:"", picture:"", summary:"", category:["IA","PC","IT GENERAL","SEGURIDAD", "INTERNET"] })
     const [validations, setValidations] = useState({ title:false, summary:false });
     const [fileImg, setFileImg] = useState(null)
 
@@ -116,6 +116,17 @@ const CreatePost = () => {
                         onChange={(e) => setFileImg(e.target.files[0])}
                     />
 				</div>
+                
+                <div>
+                    <label>Categoria del Post</label>
+                    <select value={entry.category} onChange={handleInputChange} name="category">
+                        <option value="IA">IA</option>
+                        <option value="PC">PC</option>
+                        <option value="IT GENERAL">IT GENERAL</option>
+                        <option value="SEGURIDAD">SEGURIDAD</option>
+                        <option value="INTERNET">INTERNET</option>
+                    </select>
+                </div>
                 
 				<div>
                     <label>Contenido del Post</label>

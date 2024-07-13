@@ -13,6 +13,7 @@ export const useAuthContext = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [categorySelected, setCategorySelected] = useState("");
 
 
     const registerUser = async(email, password) => {
@@ -119,7 +120,7 @@ const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ user, registerUser, loginUser, getRol, closeSesion }}>
+        <AuthContext.Provider value={{ user, registerUser, loginUser, getRol, closeSesion, categorySelected, setCategorySelected }}>
             { children }
         </AuthContext.Provider>
     )

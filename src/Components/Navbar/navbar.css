@@ -24,6 +24,11 @@
 		background-position: center center;
 	}
 
+	.activ{
+		color: crimson !important;
+		border-bottom: solid 2px crimson;
+		width: 100%;
+	}
 	.active{
 		color: crimson !important;
 		border-bottom: solid 2px crimson;
@@ -74,7 +79,7 @@
 		background: crimson;
 		border-radius: 0px;
 	}
-	.ftco-navbar-light .navbar-nav > .nav-item.active > a {
+	.ftco-navbar-light .navbar-nav > .nav-item > a {
 		color: crimson;
 	}
 	.ftco-navbar-light .navbar-toggler {
@@ -117,10 +122,6 @@
 	justify-content: center;
 	align-items: center;
 }
-
-
-
-
 
 
 

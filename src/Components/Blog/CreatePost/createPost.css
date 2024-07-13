@@ -75,6 +75,16 @@
 	color: #02a802;
 }
 
+.formulario select {
+	color: rgb(17, 17, 17);
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	font-size: 18px;
+	text-align: center;
+	padding: 3px;
+}
 
 
 #o{

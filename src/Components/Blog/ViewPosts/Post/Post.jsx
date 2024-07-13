@@ -3,7 +3,7 @@ import { useState } from "react";
 import notFound from "../../../../Assets/img/notFound.png"
 import "./post.css"
 
-const Post = ({ id, title, summary, picture, content }) => {
+const Post = ({ id, title, summary, picture, content, category }) => {
     const [imgSrc, setImgSrc] = useState(picture);
 
     const handleImageError = () => {
@@ -26,6 +26,10 @@ const Post = ({ id, title, summary, picture, content }) => {
             
             <div className="postContent">
                 <div dangerouslySetInnerHTML={{ __html: content }} className="postText"></div>
+            </div>
+            
+            <div className="postCategory">
+                <h2>Categoria: <span>{ category }</span></h2>
             </div>
         </div>
     )
