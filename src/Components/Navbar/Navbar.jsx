@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import menu from "../../Assets/img/menu.png";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase.js";
 import { useAuthContext } from "../../Context/AuthProvider.jsx";
 import "./navbar.css";
@@ -8,6 +8,13 @@ import "./navbar.css";
 const Navbar = () => {
     const { user, closeSesion, categorySelected, setCategorySelected } = useAuthContext();
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleCloseSesion = async() =>{
+        await closeSesion(auth);
+        navigate("/");
+    }
+
 
     return (
         <section className="ftco-section">
@@ -59,7 +66,7 @@ const Navbar = () => {
                                     <button className="btnNavBar">
                                         <Link to={`/profile/${user.uid}`} className="nav-link">Perfil</Link>
                                     </button>
-                                    <button className="btnNavBar" onClick={() => closeSesion(auth)}>Cerrar sesión</button>
+                                    <button className="btnNavBar" onClick={handleCloseSesion}>Cerrar sesión</button>
                                 </div>
                             ) : (
                                 <ul className="navbar-nav ml-auto mr-md-3">

@@ -9,7 +9,6 @@ import LoginForm from "../Components/Login/LoginForm.jsx";
 import ProtectedRouter from "../Assets/utils/ProtectedRouter.jsx"
 import ViewProfile from "../Components/ViewProfile/ViewProfile.jsx"
 
-
 const Router = () => {
     return (
         <BrowserRouter>
@@ -33,6 +32,5 @@ const Router = () => {
         </BrowserRouter>
     )
 }
-
 
 export default Router

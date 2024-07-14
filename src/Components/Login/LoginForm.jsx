@@ -1,56 +1,85 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Context/AuthProvider.jsx";
+import Swal from "sweetalert2";
 import "./loginForm.css"
-
 
 
 const LoginForm = () => {
     const [isRegister, setIsRegister] = useState(false)
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
+    const [setsuccess, setSetsuccess] = useState(false)
 
+    const { registerUser, loginUser, user } = useAuthContext()
     const navigate = useNavigate();
 
-    const { registerUser, loginUser } = useAuthContext()
-
-
     const handleSubmit = async(e) =>{
-        try {
             e.preventDefault();
             try {
                 if (isRegister) {
                     await registerUser(userEmail, userPassword);
+                    Swal.fire({
+                        title: "Registrado",
+                        icon: "success"
+                    });
+                    setSetsuccess(true);
                 }
                 else {
                     await loginUser(userEmail, userPassword);
+                    Swal.fire({
+                        title: "Sesion iniciada",
+                        icon: "success"
+                    });
+                    setSetsuccess(true);
                 }
-                
-                navigate("/");
             }
             catch (error) {
                 console.log(error.message);
+                setSetsuccess(false);
+                switch(error.code){
+                    case "auth/email-already-in-use":
+                        Swal.fire({
+                            title: "Email en uso",
+                            text: "Prueba con otro email",
+                            icon: "error"
+                        });
+                    break;
+                    
+                    case "auth/invalid-email":
+                        Swal.fire({
+                            title: "Email invalido",
+                            text: "Prueba con otro email",
+                            icon: "error"
+                        });  
+                    break;
+                    
+                    case "auth/weak-password":
+                        Swal.fire({
+                            title: "La contraseña es muy debil",
+                            text: "Cambia la contraseña o prueba con otra",
+                            icon: "error"
+                        });
+                    break;
+                    
+                    case "auth/too-many-requests":
+                        Swal.fire({
+                            title: "Muchos intentos seguidos, inténtalo más tarde",
+                            icon: "error"
+                        });
+                    break;
+                    
+                    default:
+                        Swal.fire({
+                            title: "Algo salio mal",
+                            icon: "error"
+                        });
+                }
             }
-        }
-        catch (error) {
-            console.log(error.message);
-            
-            switch(error.code){
-                case "auth/email-already-in-use": alert("El email ya se esta usando")
-                break;
-                
-                case "auth/invalid-email": alert("Email invalido")
-                break;
-                
-                case "auth/weak-password": alert("La contraseña es muy debil")
-                break;
-                
-                case "auth/too-many-requests": alert("Muchos intentos seguidos, inténtalo más tarde")
-                break;
-                
-                default: alert("Algo salio mal")
-            }
-        }
+    }
+
+    if(setsuccess){
+        navigate(`/profile/${user.uid}`);
     }
 
 

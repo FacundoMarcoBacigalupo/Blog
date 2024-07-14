@@ -1,6 +1,5 @@
 import "./Loading.css"
 
-
 const Loading = () =>{
     return (
         <div className="containerLoading">
@@ -21,6 +20,5 @@ const Loading = () =>{
         </div>
     )
 }
-
 
 export default Loading
