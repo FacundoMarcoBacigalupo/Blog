@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import menu from "../../Assets/img/menu.png";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { auth } from "../../firebase.js";
 import { useAuthContext } from "../../Context/AuthProvider.jsx";
 import "./navbar.css";
 
 const Navbar = () => {
     const { user, closeSesion, categorySelected, setCategorySelected } = useAuthContext();
+    const location = useLocation();
 
     return (
         <section className="ftco-section">
@@ -33,23 +34,23 @@ const Navbar = () => {
                                 )}
                                 
                                 <li className="nav-item">
-                                    <button className={`nav-link ${ categorySelected == "IA" ? "activ" : "" }`} onClick={() => setCategorySelected("IA")}>IA</button>
+                                    <NavLink to="/" className={`nav-link ${ categorySelected == "IA" ? "activ" : "" }`} onClick={() => setCategorySelected("IA")}>IA</NavLink>
                                 </li>
                                 
                                 <li className="nav-item">
-                                    <button className={`nav-link ${ categorySelected == "PC" ? "activ" : "" }`} onClick={() => setCategorySelected("PC")}>PC</button>
+                                    <NavLink to="/" className={`nav-link ${ categorySelected == "PC" ? "activ" : "" }`} onClick={() => setCategorySelected("PC")}>PC</NavLink>
                                 </li>
                                 
                                 <li className="nav-item">
-                                    <button className={`nav-link ${ categorySelected == "IT GENERAL" ? "activ" : "" }`} onClick={() => setCategorySelected("IT GENERAL")}>IT GENERAL</button>
+                                    <NavLink to="/" className={`nav-link ${ categorySelected == "IT GENERAL" ? "activ" : "" }`} onClick={() => setCategorySelected("IT GENERAL")}>IT GENERAL</NavLink>
                                 </li>
                                 
                                 <li className="nav-item">
-                                    <button className={`nav-link ${ categorySelected == "SEGURIDAD" ? "activ" : "" }`} onClick={() => setCategorySelected("SEGURIDAD")}>SEGURIDAD</button>
+                                    <NavLink to="/" className={`nav-link ${ categorySelected == "SEGURIDAD" ? "activ" : "" }`} onClick={() => setCategorySelected("SEGURIDAD")}>SEGURIDAD</NavLink>
                                 </li>
                                 
                                 <li className="nav-item">
-                                    <button className={`nav-link ${ categorySelected == "INTERNET" ? "activ" : "" }`} onClick={() => setCategorySelected("INTERNET")}>INTERNET</button>
+                                    <NavLink to="/" className={`nav-link ${ categorySelected == "INTERNET" ? "activ" : "" }`} onClick={() => setCategorySelected("INTERNET")}>INTERNET</NavLink>
                                 </li>
                             </ul>
                             
@@ -63,7 +64,7 @@ const Navbar = () => {
                             ) : (
                                 <ul className="navbar-nav ml-auto mr-md-3">
                                     <li className="nav-item">
-                                        <NavLink to="/login" className="nav-link">Login</NavLink>
+                                        <NavLink to="/login" onClick={() => setCategorySelected("A")} className={`nav-link ${location.pathname === "/login" ? "activ" : ""}`}>Login</NavLink>
                                     </li>
                                 </ul>
                             )}

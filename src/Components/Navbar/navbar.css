@@ -29,11 +29,6 @@
 		border-bottom: solid 2px crimson;
 		width: 100%;
 	}
-	.active{
-		color: crimson !important;
-		border-bottom: solid 2px crimson;
-		width: 100%;
-	}
 
 	.ftco-navbar-light {
 		background: rgb(17, 17, 17) !important;
