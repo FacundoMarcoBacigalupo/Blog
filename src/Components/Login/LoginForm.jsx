@@ -35,7 +35,7 @@ const LoginForm = () => {
                 }
             }
             catch (error) {
-                console.log(error.message);
+                // console.log(error.message);
                 setSetsuccess(false);
                 switch(error.code){
                     case "auth/email-already-in-use":
