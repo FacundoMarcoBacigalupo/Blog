@@ -138,7 +138,7 @@ const CreatePost = () => {
 				<div>
                     <label>Contenido del Post</label>
                     <Editor
-                        apiKey='730dnxdvv8a2ytisj1v0b9qvktuh9xxfxb2qabsg2lv2n4uw'
+                        apiKey={import.meta.env.VITE_API_CREATE_POST}
                         onInit={(_evt, editor) => editorRef.current = editor}
                         init={{
                         height: 500,
