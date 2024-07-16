@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db, getFile, uploadFile } from '../../../firebase.js';
 import { Editor } from '@tinymce/tinymce-react';
+import Swal from 'sweetalert2';
 import "./createPost.css";
 
 
@@ -47,7 +48,10 @@ const CreatePost = () => {
             
             if(Object.values(validations).every(value => value === true)){
                 sendData(entry)
-                alert("Post Creado")
+                Swal.fire({
+                    title: "Post Creado",
+                    icon: "success"
+                });
                 entry.title = ""
                 entry.content = ""
                 entry.picture = ""
@@ -56,7 +60,10 @@ const CreatePost = () => {
                 setValidations({ title:false, summary:false })
             }
             else{
-                alert("Completa el formulario")
+                Swal.fire({
+                    title: "Completa el formulario",
+                    icon: "error"
+                });
             }
         }
         catch (error) {
