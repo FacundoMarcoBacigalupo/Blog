@@ -38,16 +38,6 @@ const AuthProvider = ({ children }) => {
     };
     
 
-    const ALGO = async(email, password) => {
-        try {
-            console.log("first")
-        }
-        catch (error) {
-            console.error("Error al iniciar sesión:", error);
-            throw error;
-        }
-    };
-
     const loginUser = async(email, password) => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
