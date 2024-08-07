@@ -38,19 +38,9 @@ const AuthProvider = ({ children }) => {
     };
     
 
-    const loginUserss = async(email, password) => {
+    const ALGO = async(email, password) => {
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            
-            // Obtener el ID del documento en Firestore basado en el email del usuario
-            const userRef = collection(db, "users");
-            const querySnapshot = await getDocs(query(userRef, where("email", "==", email)));
-            const userDoc = querySnapshot.docs[0];
-            const uid = userDoc.id;
-            
-            // Actualizar el estado del usuario con el UID del documento en Firestore
-            setUser({ uid: uid, email: email });
-            return userCredential.user;
+            console.log("first")
         }
         catch (error) {
             console.error("Error al iniciar sesión:", error);
