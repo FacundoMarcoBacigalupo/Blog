@@ -17,7 +17,7 @@ const LoginForm = () => {
     const handleSubmit = async(e) =>{
             e.preventDefault();
             try {
-                if (isRegister) {
+                if (isRegister && ["@gmail.com", "@hotmail.com"].some(suffix => userEmail.endsWith(suffix))) {
                     await registerUser(userEmail, userPassword);
                     Swal.fire({
                         title: "Registrado",
