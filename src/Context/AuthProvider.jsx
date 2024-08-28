@@ -5,7 +5,6 @@ import React, { useCallback, useContext, useEffect, useState } from "react"
 import { auth, db } from "../firebase"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-
 const AuthContext = React.createContext([]);
 
 export const useAuthContext = () => useContext(AuthContext);
