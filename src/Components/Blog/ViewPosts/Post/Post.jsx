@@ -35,5 +35,4 @@ const Post = ({ id, title, summary, picture, content, category }) => {
     )
 }
 
-
 export default Post

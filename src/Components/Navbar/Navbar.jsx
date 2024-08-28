@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import menu from "../../Assets/img/menu.png";
 import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase.js";
 import { useAuthContext } from "../../Context/AuthProvider.jsx";
+import menu from "../../Assets/img/menu.png";
 import "./navbar.css";
 
 const Navbar = () => {

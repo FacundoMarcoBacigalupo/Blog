@@ -41,7 +41,8 @@ const CreatePost = () => {
             if (fileImg) {
                 const fileUploadTask = await uploadFile(fileImg);
                 pictureUrl = await getFile(fileUploadTask.ref.fullPath);
-            } else {
+            }
+            else {
                 pictureUrl = entry.picture;
             }
             entry.picture = pictureUrl;

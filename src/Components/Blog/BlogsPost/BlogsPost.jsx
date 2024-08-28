@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import notFound from "../../../Assets/img/notFound.png"
-import { useState } from 'react';
 import "./blogsPost.css"
-
 
 const BlogsPost = ({ id, title, summary, picture }) => {  
     const [imgSrc, setImgSrc] = useState(picture);

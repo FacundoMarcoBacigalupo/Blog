@@ -5,14 +5,11 @@ import { useParams } from 'react-router-dom'
 import Post from './Post/Post.jsx'
 import Loading from "../../Loading/Loading.jsx"
 
-
-
 const ViewPosts = () => {
     const [blogEntries, setBlogEntries] = useState([])
     const [loading, setLoading] = useState(true)
 
     const { postId } = useParams()
-
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -38,6 +35,5 @@ const ViewPosts = () => {
         <Post {...blogEntries}/>
     )
 }
-
 
 export default ViewPosts

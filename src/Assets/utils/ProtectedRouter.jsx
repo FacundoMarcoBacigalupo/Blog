@@ -3,8 +3,6 @@ import { Navigate, Outlet } from "react-router-dom"
 import { useAuthContext } from "../../Context/AuthProvider.jsx";
 import { useEffect, useState } from "react";
 
-
-
 const ProtectedRouter = ({ redirectPath="/" }) =>{
     const { getRol } = useAuthContext();
     const [rolUser, setRolUser] = useState(null);

@@ -5,8 +5,6 @@ import List from "./List/List.jsx"
 import Loading from "../Loading/Loading.jsx"
 import "./blog.css"
 
-
-
 const Blog = () => {
     const [blogEntries, setBlogEntries] = useState([])
 	const [loading, setLoading] = useState(true)
@@ -36,6 +34,5 @@ const Blog = () => {
         </div>
     )
 }
-
 
 export default Blog

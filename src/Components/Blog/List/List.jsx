@@ -1,10 +1,8 @@
 
 import { Fragment, memo } from 'react'
+import { useAuthContext } from '../../../Context/AuthProvider.jsx';
 import BlogPost from "../BlogsPost/BlogsPost.jsx"
 import PropTypes from 'prop-types';
-import { useAuthContext } from '../../../Context/AuthProvider.jsx';
-
-
 
 const List = memo(function List({ blogEntries }){
     const { categorySelected } = useAuthContext();
@@ -14,8 +12,7 @@ const List = memo(function List({ blogEntries }){
 		: blogEntries;
     return (
         <Fragment>
-            {
-            filteredEntries.map(data => {
+            { filteredEntries.map(data => {
                 if(data && data.content){
                     return (
                         <article key={data.id}>
@@ -26,11 +23,11 @@ const List = memo(function List({ blogEntries }){
                 else{
                     return null;
                 }
-            })
-            }
+            }) }
         </Fragment>
     )
-}, (prevProps, nextProps) => {
+},
+(prevProps, nextProps) => {
     return prevProps.blogEntries.length === nextProps.blogEntries.length;
 });
 
