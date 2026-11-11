@@ -10,6 +10,12 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [catOpen, setCatOpen] = useState(false);
+    const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }, [theme]);
 
     const handleCloseSesion = async () => {
         await closeSesion();
@@ -53,6 +59,10 @@ const Navbar = () => {
                     {user != null && user.rol === "admin" && (
                         <NavLink to="/publicar-post" className="nav-link" onClick={() => setOpen(false)}>Crear Post</NavLink>
                     )}
+
+                    <button className="theme-toggle" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label="Cambiar tema">
+                        {theme === "light" ? "🌙" : "☀️"}
+                    </button>
 
                     {user && user.uid ? (
                         <div className="nav-auth">
