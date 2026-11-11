@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import notFound from "../../../Assets/img/notFound.png"
 import "./blogsPost.css"
 
+const PLACEHOLDER = "https://picsum.photos/seed/itnoticias/800/450";
 const BlogsPost = ({ id, title, summary, picture }) => {  
-    const [imgSrc, setImgSrc] = useState(picture);
+    const [imgSrc, setImgSrc] = useState(picture || PLACEHOLDER);
 
     const handleImageError = () => {
         setImgSrc(notFound);

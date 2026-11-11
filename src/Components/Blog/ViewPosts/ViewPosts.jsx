@@ -1,5 +1,6 @@
 import { getDoc, doc } from 'firebase/firestore'
 import { db } from "../../../firebase.js"
+import { staticPosts } from "../../../data/posts.js"
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Post from './Post/Post.jsx'
@@ -15,6 +16,13 @@ const ViewPosts = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setLoading(true)
         
+        const staticPost = staticPosts.find(p => p.id === postId);
+        if (staticPost) {
+            setBlogEntries(staticPost);
+            setLoading(false);
+            return;
+        }
+
         const docR = doc( db, "posts", postId )
         getDoc(docR)
             .then( res =>{

@@ -3,8 +3,9 @@ import { useState } from "react";
 import notFound from "../../../../Assets/img/notFound.png"
 import "./post.css"
 
+const PLACEHOLDER = "https://picsum.photos/seed/itnoticias/1200/600";
 const Post = ({ id, title, summary, picture, content, category }) => {
-    const [imgSrc, setImgSrc] = useState(picture);
+    const [imgSrc, setImgSrc] = useState(picture || PLACEHOLDER);
 
     const handleImageError = () => {
         setImgSrc(notFound);

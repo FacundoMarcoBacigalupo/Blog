@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { collection, getDocs } from "firebase/firestore"
 import { db } from "../../firebase.js"
+import { staticPosts } from "../../data/posts.js"
 import List from "./List/List.jsx"
 import Loading from "../Loading/Loading.jsx"
 import "./blog.css"
@@ -18,9 +19,9 @@ const Blog = () => {
 				const response = res.docs.map( doc =>{
 					return {id:doc.id, ...doc.data()}
 				})
-				setBlogEntries(response)
+				setBlogEntries([...staticPosts, ...response])
 			})
-			.catch(error => console.error(error))
+			.catch(error => { console.error(error); setBlogEntries(staticPosts); })
 			.finally(() => setLoading(false))
 	}, [])
 

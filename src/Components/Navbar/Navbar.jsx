@@ -1,85 +1,59 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase.js";
 import { useAuthContext } from "../../Context/AuthProvider.jsx";
-import menu from "../../Assets/img/menu.png";
+import { useState } from "react";
 import "./navbar.css";
 
 const Navbar = () => {
     const { user, closeSesion, categorySelected, setCategorySelected } = useAuthContext();
     const location = useLocation();
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
-    const handleCloseSesion = async() =>{
+    const handleCloseSesion = async () => {
         await closeSesion(auth);
         navigate("/");
-    }
+        setOpen(false);
+    };
 
+    const go = (cat) => { setCategorySelected(cat); setOpen(false); };
 
     return (
-        <section className="ftco-section">
-            <div className="container">
-                <nav className="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
-                    <div className="container">
-                        <p id="styleLg" className="navbar-brand">
-                            <Link to="/" onClick={() => setCategorySelected("")}>IT Noticias</Link>
-                        </p>
-                        
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                            <img id="menuT" src={menu} alt="menuTogle" />
-                        </button>
-                        
-                        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <ul className="navbar-nav ml-auto mr-md-3">
-                                <li className="nav-item">
-                                    <NavLink to="/" onClick={() => setCategorySelected("")} className={`nav-link ${ categorySelected == "" ? "activ" : "" }`}>Inicio</NavLink>
-                                </li>
-                                {user != null && user.rol === "admin" && (
-                                    <li className="nav-item">
-                                        <NavLink to="/publicar-post" className="nav-link">Crear Post</NavLink>
-                                    </li>
-                                )}
-                                
-                                <li className="nav-item">
-                                    <NavLink to="/" className={`nav-link ${ categorySelected == "IA" ? "activ" : "" }`} onClick={() => setCategorySelected("IA")}>IA</NavLink>
-                                </li>
-                                
-                                <li className="nav-item">
-                                    <NavLink to="/" className={`nav-link ${ categorySelected == "PC" ? "activ" : "" }`} onClick={() => setCategorySelected("PC")}>PC</NavLink>
-                                </li>
-                                
-                                <li className="nav-item">
-                                    <NavLink to="/" className={`nav-link ${ categorySelected == "IT GENERAL" ? "activ" : "" }`} onClick={() => setCategorySelected("IT GENERAL")}>IT GENERAL</NavLink>
-                                </li>
-                                
-                                <li className="nav-item">
-                                    <NavLink to="/" className={`nav-link ${ categorySelected == "SEGURIDAD" ? "activ" : "" }`} onClick={() => setCategorySelected("SEGURIDAD")}>SEGURIDAD</NavLink>
-                                </li>
-                                
-                                <li className="nav-item">
-                                    <NavLink to="/" className={`nav-link ${ categorySelected == "INTERNET" ? "activ" : "" }`} onClick={() => setCategorySelected("INTERNET")}>INTERNET</NavLink>
-                                </li>
-                            </ul>
-                            
-                            {user && user.uid ? (
-                                <div id="containerLogin">
-                                    <button className="btnNavBar">
-                                        <Link to={`/profile/${user.uid}`} className="nav-link">Perfil</Link>
-                                    </button>
-                                    <button className="btnNavBar" onClick={handleCloseSesion}>Cerrar sesión</button>
-                                </div>
-                            ) : (
-                                <ul className="navbar-nav ml-auto mr-md-3">
-                                    <li className="nav-item">
-                                        <NavLink to="/login" onClick={() => setCategorySelected("A")} className={`nav-link ${location.pathname === "/login" ? "activ" : ""}`}>Login</NavLink>
-                                    </li>
-                                </ul>
-                            )}
+        <header className="site-nav">
+            <div className="nav-inner">
+                <Link to="/" className="nav-brand" onClick={() => go("")}>
+                    <span className="brand-dot" />
+                    <span className="brand-text">IT Noticias</span>
+                </Link>
+
+                <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label="Menú">
+                    <span className={open ? "bar open" : "bar"} />
+                    <span className={open ? "bar open" : "bar"} />
+                    <span className={open ? "bar open" : "bar"} />
+                </button>
+
+                <nav className={`nav-links ${open ? "open" : ""}`}>
+                    <NavLink to="/" onClick={() => go("")} className={`nav-link ${categorySelected === "" ? "active" : ""}`}>Inicio</NavLink>
+                    {user != null && user.rol === "admin" && (
+                        <NavLink to="/publicar-post" className="nav-link" onClick={() => setOpen(false)}>Crear Post</NavLink>
+                    )}
+                    <button className={`nav-link ${categorySelected === "IA" ? "active" : ""}`} onClick={() => go("IA")}>IA</button>
+                    <button className={`nav-link ${categorySelected === "PC" ? "active" : ""}`} onClick={() => go("PC")}>PC</button>
+                    <button className={`nav-link ${categorySelected === "IT GENERAL" ? "active" : ""}`} onClick={() => go("IT GENERAL")}>IT General</button>
+                    <button className={`nav-link ${categorySelected === "SEGURIDAD" ? "active" : ""}`} onClick={() => go("SEGURIDAD")}>Seguridad</button>
+                    <button className={`nav-link ${categorySelected === "INTERNET" ? "active" : ""}`} onClick={() => go("INTERNET")}>Internet</button>
+
+                    {user && user.uid ? (
+                        <div className="nav-auth">
+                            <Link to={`/profile/${user.uid}`} className="nav-link" onClick={() => setOpen(false)}>Perfil</Link>
+                            <button className="nav-btn" onClick={handleCloseSesion}>Salir</button>
                         </div>
-                    </div>
+                    ) : (
+                        <Link to="/login" className="nav-btn primary" onClick={() => setOpen(false)}>Login</Link>
+                    )}
                 </nav>
             </div>
-        </section>
+        </header>
     );
 };
 
