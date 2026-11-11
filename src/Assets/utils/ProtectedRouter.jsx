@@ -4,25 +4,26 @@ import { useAuthContext } from "../../Context/AuthProvider.jsx";
 import { useEffect, useState } from "react";
 
 const ProtectedRouter = ({ redirectPath="/" }) =>{
-    const { getRol } = useAuthContext();
+    const { getRol, loading, user } = useAuthContext();
     const [rolUser, setRolUser] = useState(null);
 
     useEffect(() => {
+        if (loading) return;
         const fetchRol = async () => {
             try {
                 const rol = await getRol();
                 setRolUser(rol);
             } catch (error) {
                 console.error("Error al obtener el rol:", error);
+                setRolUser("user");
             }
         };
         
         fetchRol();
-    }, [getRol]);
+    }, [getRol, loading, user]);
 
-    if (rolUser === null) {
-        // Si el rol aún no se ha cargado, muestra un componente de carga o simplemente devuelve null
-        return null;
+    if (loading || rolUser === null) {
+        return <div style={{display:"grid",placeItems:"center",minHeight:"60vh",color:"#a1a1aa"}}>Cargando…</div>;
     }
 
 

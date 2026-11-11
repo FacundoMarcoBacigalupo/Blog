@@ -1,50 +1,107 @@
-body{
-  color: rgb(17, 17, 17);
-  background-color: #fff;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  box-sizing: border-box;
-  behavior: smooth;
-  outline: none;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #0b0b0f;
+  --bg-soft: #111118;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #f5f5f7;
+  --muted: #a1a1aa;
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-.containerComponent{
+html, body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(139, 92, 246, 0.12), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 20% 30%, rgba(59, 130, 246, 0.10), transparent 55%),
+    #0b0b0f;
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 32px 32px;
+  opacity: 0.6;
+}
+
+#root { position: relative; z-index: 1; }
+
+a { color: inherit; text-decoration: none; }
+
+.containerComponent {
   display: flex;
   justify-content: space-around;
-  background-color: #f5f5f7;
+  background: transparent;
   margin-bottom: -10px;
 }
 
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0b0b0f; }
+::-webkit-scrollbar-thumb { background: #2a2a35; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3f3f50; }
+* { scrollbar-width: thin; scrollbar-color: #2a2a35 #0b0b0f; }
 
+::selection { background: var(--accent); color: #fff; }
+::-moz-selection { background: var(--accent); color: #fff; }
 
-/* Para WebKit (Chrome, Safari, Opera) */
-::-webkit-scrollbar {
-  width: 5px;
-  border: 10px solid rgb(17, 17, 17) transparent;
-  scrollbar-width: 5px;
+/* Cards tech */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
-::-webkit-scrollbar-track {
-  background-color: rgb(17, 17, 17);
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.1);
 }
 
+h1, h2, h3, h4, h5, h6 { color: #f5f5f7; letter-spacing: -0.02em; }
+p { color: var(--muted); line-height: 1.7; }
 
-/* Para Firefox */
-* {
-  scrollbar-width: 5px;
-  scrollbar-color: rgb(17, 17, 17) transparent;
-}
-
-
-::selection {
-  background: rgb(17, 17, 17);
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--accent);
   color: #fff;
 }
+.btn:hover { background: var(--accent-light); transform: translateY(-1px); }
 
-/* Firefox */
-::-moz-selection {
-  background: rgb(17, 17, 17);
-  color: #fff;
-}
+/* Loading spinner */
+.spinner { border: 2px solid rgba(255,255,255,0.1); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
