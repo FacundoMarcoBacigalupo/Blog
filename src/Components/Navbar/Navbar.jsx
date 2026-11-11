@@ -1,6 +1,6 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Context/AuthProvider.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./navbar.css";
 
 const CATEGORIES = ["IA", "PC", "IT GENERAL", "SEGURIDAD", "INTERNET"];
