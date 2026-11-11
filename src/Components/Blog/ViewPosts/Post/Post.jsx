@@ -1,21 +1,19 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import notFound from "../../../../Assets/img/notFound.png"
 import "./post.css"
 
-const PLACEHOLDER = "https://picsum.photos/seed/itnoticias/1200/600";
+const PLACEHOLDER = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80";
 const Post = ({ id, title, summary, picture, image, photo, url, content, category }) => {
     const [imgSrc, setImgSrc] = useState(picture || image || photo || url || PLACEHOLDER);
 
     const handleImageError = () => {
         if (imgSrc !== PLACEHOLDER) setImgSrc(PLACEHOLDER);
         else setImgSrc(notFound);
-    };
-
+    }
 
     return (
         <div key={id} className="containerPost">
-            <header>
+            <header className="postHeader">
                 <h1 className="postTitle">{ title }</h1>
                 <h4 className="postSummary">{ summary }</h4>
             </header>
@@ -24,15 +22,17 @@ const Post = ({ id, title, summary, picture, image, photo, url, content, categor
                 <img src={ imgSrc } onError={handleImageError} alt={`${title}-img`} />
             </picture>
             
-            <hr />
+            <hr className="postDivider" />
             
             <div className="postContent">
                 <div dangerouslySetInnerHTML={{ __html: content }} className="postText"></div>
             </div>
             
-            <div className="postCategory">
-                <h2>Categoria: <span>{ category }</span></h2>
-            </div>
+            {category && (
+                <div className="postCategory">
+                    <span>{ category }</span>
+                </div>
+            )}
         </div>
     )
 }
