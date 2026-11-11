@@ -1,22 +1,33 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
-import { PrismaClient } from "@prisma/client";
+import admin from "firebase-admin";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
 
-const prisma = new PrismaClient();
 const PORT = Number(process.env.PORT || 4000);
 const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 const IS_PROD = process.env.NODE_ENV === "production";
 
+// ---------- Firebase Admin init ----------
+if (!admin.apps.length) {
+  const sa = process.env.FIREBASE_SERVICE_ACCOUNT;
+  if (sa) {
+    admin.initializeApp({ credential: admin.credential.cert(JSON.parse(sa)) });
+  } else {
+    // Local: use service account file
+    admin.initializeApp({ credential: admin.credential.applicationDefault() });
+  }
+}
+const db = admin.firestore();
+
 // ---------- In-memory rate limiter: 15 attempts per IP, 6h block ----------
 type Bucket = { count: number; firstAt: number; blockedUntil: number };
 const buckets = new Map<string, Bucket>();
 const MAX_ATTEMPTS = 15;
-const WINDOW_MS = 6 * 60 * 60 * 1000; // 6h
+const WINDOW_MS = 6 * 60 * 60 * 1000;
 
 function checkRate(ip: string): { ok: boolean; retryAfter?: number } {
   const now = Date.now();
@@ -57,10 +68,10 @@ function recordAttempt(ip: string, success: boolean) {
 async function seedAdmin() {
   const email = process.env.ADMIN_EMAIL || "statimsoftware@gmail.com";
   const password = process.env.ADMIN_PASSWORD || "ssstatim12345678";
-  const existing = await prisma.user.findUnique({ where: { email } });
-  if (!existing) {
+  const snap = await db.collection("users").where("email", "==", email).limit(1).get();
+  if (snap.empty) {
     const hash = await bcrypt.hash(password, 10);
-    await prisma.user.create({ data: { email, passwordHash: hash, role: "admin" } });
+    await db.collection("users").add({ email, passwordHash: hash, role: "admin", createdAt: new Date() });
     console.log("Admin seeded:", email);
   }
 }
@@ -73,7 +84,6 @@ await app.register(cors, {
 });
 await app.register(cookie);
 
-// Rate limit hook for auth routes
 app.addHook("preHandler", async (req, reply) => {
   if (req.url.startsWith("/api/auth/")) {
     const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.ip;
@@ -86,7 +96,14 @@ app.addHook("preHandler", async (req, reply) => {
 });
 
 const loginSchema = z.object({ email: z.string().email(), password: z.string().min(1) });
-const registerSchema = z.object({ email: z.string().email(), password: z.string().min(6), name: z.string().optional() });
+const registerSchema = z.object({ email: z.string().email(), password: z.string().min(6) });
+
+async function findUser(email: string) {
+  const snap = await db.collection("users").where("email", "==", email).limit(1).get();
+  if (snap.empty) return null;
+  const doc = snap.docs[0];
+  return { id: doc.id, ...doc.data() } as { id: string; email: string; passwordHash: string; role: string };
+}
 
 app.post("/api/auth/register", async (req, reply) => {
   const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.ip;
@@ -96,15 +113,15 @@ app.post("/api/auth/register", async (req, reply) => {
     return reply.code(400).send({ error: "invalid_input" });
   }
   const { email, password } = parsed.data;
-  const exists = await prisma.user.findUnique({ where: { email } });
+  const exists = await findUser(email);
   if (exists) {
     recordAttempt(ip, false);
     return reply.code(409).send({ error: "email_taken" });
   }
   const hash = await bcrypt.hash(password, 10);
-  const user = await prisma.user.create({ data: { email, passwordHash: hash, role: "user" } });
+  const ref = await db.collection("users").add({ email, passwordHash: hash, role: "user", createdAt: new Date() });
   recordAttempt(ip, true);
-  const token = jwt.sign({ uid: user.id, role: user.role }, JWT_SECRET, { expiresIn: "7d" });
+  const token = jwt.sign({ uid: ref.id, role: "user" }, JWT_SECRET, { expiresIn: "7d" });
   reply.setCookie("access_token", token, {
     httpOnly: true,
     secure: IS_PROD,
@@ -112,7 +129,7 @@ app.post("/api/auth/register", async (req, reply) => {
     path: "/",
     maxAge: 7 * 24 * 60 * 60,
   });
-  return { user: { id: user.id, email: user.email, role: user.role } };
+  return { user: { id: ref.id, email, role: "user" } };
 });
 
 app.post("/api/auth/login", async (req, reply) => {
@@ -123,7 +140,7 @@ app.post("/api/auth/login", async (req, reply) => {
     return reply.code(400).send({ error: "invalid_input" });
   }
   const { email, password } = parsed.data;
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = await findUser(email);
   if (!user) {
     recordAttempt(ip, false);
     return reply.code(401).send({ error: "invalid_credentials" });
@@ -155,9 +172,10 @@ app.get("/api/auth/me", async (req, reply) => {
   if (!token) return reply.code(401).send({ error: "unauthenticated" });
   try {
     const payload = jwt.verify(token, JWT_SECRET) as { uid: string; role: string };
-    const user = await prisma.user.findUnique({ where: { id: payload.uid } });
-    if (!user) return reply.code(401).send({ error: "unauthenticated" });
-    return { user: { id: user.id, email: user.email, role: user.role } };
+    const doc = await db.collection("users").doc(payload.uid).get();
+    if (!doc.exists) return reply.code(401).send({ error: "unauthenticated" });
+    const u = doc.data() as { email: string; role: string };
+    return { user: { id: doc.id, email: u.email, role: u.role } };
   } catch {
     return reply.code(401).send({ error: "unauthenticated" });
   }

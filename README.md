@@ -63,13 +63,18 @@ Configurar en Netlify → Site settings → Environment variables (prefijo VITE_
 
 ## Variables de entorno (Render — backend)
 
-- `DATABASE_URL` (Postgres de Render o `file:./dev.db` para SQLite local)
 - `JWT_SECRET` (string largo aleatorio)
 - `FRONTEND_URL` (URL de Netlify, ej. `https://itnoticias.netlify.app`)
 - `ADMIN_EMAIL` (email del admin)
 - `ADMIN_PASSWORD` (password del admin)
+- `FIREBASE_SERVICE_ACCOUNT` (JSON del service account de Firebase, como string)
 - `NODE_ENV=production`
 - `PORT` (Render lo setea automáticamente)
+
+## Backend: build & start
+
+- Build command: `npm install && npm run build`
+- Start command: `node dist/index.js`
 
 ## Desarrollo local
 
