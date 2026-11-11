@@ -1,6 +1,6 @@
 import { getDoc, doc } from 'firebase/firestore'
 import { db } from "../../../firebase.js"
-import { staticPosts } from "../../../data/posts.js"
+import { allStaticPosts as staticPosts } from "../../../data/posts2.js"
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Post from './Post/Post.jsx'

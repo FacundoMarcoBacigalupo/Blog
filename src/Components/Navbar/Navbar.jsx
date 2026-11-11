@@ -1,22 +1,23 @@
-import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
-import { auth } from "../../firebase.js";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Context/AuthProvider.jsx";
 import { useState } from "react";
 import "./navbar.css";
 
+const CATEGORIES = ["IA", "PC", "IT GENERAL", "SEGURIDAD", "INTERNET"];
+
 const Navbar = () => {
     const { user, closeSesion, categorySelected, setCategorySelected } = useAuthContext();
-    const location = useLocation();
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const [catOpen, setCatOpen] = useState(false);
 
     const handleCloseSesion = async () => {
-        await closeSesion(auth);
+        await closeSesion();
         navigate("/");
         setOpen(false);
     };
 
-    const go = (cat) => { setCategorySelected(cat); setOpen(false); };
+    const go = (cat) => { setCategorySelected(cat); setOpen(false); setCatOpen(false); };
 
     return (
         <header className="site-nav">
@@ -34,14 +35,24 @@ const Navbar = () => {
 
                 <nav className={`nav-links ${open ? "open" : ""}`}>
                     <NavLink to="/" onClick={() => go("")} className={`nav-link ${categorySelected === "" ? "active" : ""}`}>Inicio</NavLink>
+
+                    <div className="nav-dropdown">
+                        <button className={`nav-link ${CATEGORIES.includes(categorySelected) ? "active" : ""}`} onClick={() => setCatOpen(!catOpen)}>
+                            Categorías ▾
+                        </button>
+                        {catOpen && (
+                            <div className="nav-dropdown-menu">
+                                {CATEGORIES.map((c) => (
+                                    <button key={c} className={`nav-dropdown-item ${categorySelected === c ? "active" : ""}`} onClick={() => go(c)}>{c}</button>
+                                ))}
+                                <button className="nav-dropdown-item" onClick={() => go("")}>Todas</button>
+                            </div>
+                        )}
+                    </div>
+
                     {user != null && user.rol === "admin" && (
                         <NavLink to="/publicar-post" className="nav-link" onClick={() => setOpen(false)}>Crear Post</NavLink>
                     )}
-                    <button className={`nav-link ${categorySelected === "IA" ? "active" : ""}`} onClick={() => go("IA")}>IA</button>
-                    <button className={`nav-link ${categorySelected === "PC" ? "active" : ""}`} onClick={() => go("PC")}>PC</button>
-                    <button className={`nav-link ${categorySelected === "IT GENERAL" ? "active" : ""}`} onClick={() => go("IT GENERAL")}>IT General</button>
-                    <button className={`nav-link ${categorySelected === "SEGURIDAD" ? "active" : ""}`} onClick={() => go("SEGURIDAD")}>Seguridad</button>
-                    <button className={`nav-link ${categorySelected === "INTERNET" ? "active" : ""}`} onClick={() => go("INTERNET")}>Internet</button>
 
                     {user && user.uid ? (
                         <div className="nav-auth">
