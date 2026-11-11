@@ -29,11 +29,6 @@ const Footer = () => {
                         Noticias, análisis y tutoriales sobre el mundo IT: IA, hardware, seguridad,
                         desarrollo y tendencias tech. Actualizado diariamente.
                     </p>
-                    <div className="footer-social">
-                        <a href="https://github.com/FacundoMarcoBacigalupo" target="_blank" rel="noreferrer" aria-label="GitHub">GH</a>
-                        <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">IN</a>
-                        <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X">X</a>
-                    </div>
                 </div>
 
                 <div className="footer-col">
@@ -58,23 +53,10 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="footer-col">
-                    <h6 className="footer-title">Stack</h6>
-                    <div className="footer-list">
-                        <span className="footer-link">React 18</span>
-                        <span className="footer-link">Vite</span>
-                        <span className="footer-link">Firebase</span>
-                        <span className="footer-link">Tailwind CSS</span>
-                    </div>
-                </div>
             </div>
 
             <div className="footer-bottom">
                 <span>© {new Date().getFullYear()} IT Noticias · Desarrollado por Statim Software</span>
-                <span className="footer-bottom-links">
-                    <Link to="/privacidad">Privacidad</Link>
-                    <Link to="/terminos">Términos</Link>
-                </span>
             </div>
         </footer>
     )

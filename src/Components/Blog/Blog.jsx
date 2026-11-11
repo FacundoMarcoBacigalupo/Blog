@@ -9,39 +9,48 @@ import "./blog.css"
 const Blog = () => {
     const [blogEntries, setBlogEntries] = useState([])
     const [sort, setSort] = useState("newest")
-	const [loading, setLoading] = useState(true)
+    const [filterOpen, setFilterOpen] = useState(false)
+    const [loading, setLoading] = useState(true)
 
-	useEffect(() => {
-		setLoading(true)
-		
-		const postRef = collection(db, "posts");
-		getDocs(postRef)
-			.then( res =>{
-				const response = res.docs.map( doc =>{
-					return {id:doc.id, ...doc.data()}
-				})
-				setBlogEntries([...staticPosts, ...response])
-			})
-			.catch(error => { console.error(error); setBlogEntries(staticPosts); })
-			.finally(() => setLoading(false))
-	}, [])
+    useEffect(() => {
+        setLoading(true)
+        const postRef = collection(db, "posts");
+        getDocs(postRef)
+            .then(res => {
+                const response = res.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+                setBlogEntries([...staticPosts, ...response])
+            })
+            .catch(error => { console.error(error); setBlogEntries(staticPosts); })
+            .finally(() => setLoading(false))
+    }, [])
 
     const filtered = [...blogEntries].sort((a, b) => {
         const da = new Date(a.date || 0).getTime();
         const db_ = new Date(b.date || 0).getTime();
         return sort === "newest" ? db_ - da : da - db_;
     });
-	if (loading){
+
+    if (loading) {
         return <Loading />
     }
 
     return (
-        <div className="contenedor">
-            <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16, gap: 8 }}>
-                <button onClick={() => setSort("newest")} className={sort === "newest" ? "btn btn-active" : "btn"}>Más recientes</button>
-                <button onClick={() => setSort("oldest")} className={sort === "oldest" ? "btn btn-active" : "btn"}>Más antiguos</button>
+        <div className="blog-page">
+            <div className="filter-bar">
+                <button className="filter-toggle" onClick={() => setFilterOpen(!filterOpen)}>
+                    <span>Filtros</span>
+                    <span className="filter-caret">{filterOpen ? "▴" : "▾"}</span>
+                </button>
+                {filterOpen && (
+                    <div className="filter-options">
+                        <button className={sort === "newest" ? "filter-option active" : "filter-option"} onClick={() => { setSort("newest"); setFilterOpen(false); }}>Más recientes</button>
+                        <button className={sort === "oldest" ? "filter-option active" : "filter-option"} onClick={() => { setSort("oldest"); setFilterOpen(false); }}>Más antiguos</button>
+                    </div>
+                )}
             </div>
-			<List blogEntries={filtered}/>
+            <div className="contenedor">
+                <List blogEntries={filtered} />
+            </div>
         </div>
     )
 }

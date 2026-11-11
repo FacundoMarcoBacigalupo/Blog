@@ -1,76 +1,82 @@
-.containerLogin{
-    margin: 20px;
+.containerLogin {
     display: flex;
-	justify-content: center;
-	align-items: center;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 20px;
 }
 
-
-.styleForm{
-    width: 85%;
-	border-radius: 5px;
-	padding: 50px;
-	box-shadow: #1f1f1f 2px 5px 10px;
-	margin-top: 20px;
-    border: 1px solid crimson;
+.styleForm {
+    width: 100%;
+    max-width: 440px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 40px 32px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(8px);
 }
 
-.styleForm h1{
-    color: #1f1f1f;
+.styleForm h1 {
+    color: var(--text);
     text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+}
+
+.styleForm > div {
     margin-bottom: 20px;
 }
 
-
-.styleForm > div {
-	margin-bottom: 20px;
-}
-
-
 .styleForm label {
-	display: block;
-	font-weight: 500;
-	font-size: 18px;
-	color: #1f1f1f;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 8px;
 }
 
-
-.styleForm input{
-	width: 100%;
-	border-radius: 5px;
-	font-size: 18px;
-	padding: 10px;
-	margin-bottom: 20px;
-	border: 2px solid #e2e2e2;
-	color: #1f1f1f;
+.styleForm input {
+    width: 100%;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 12px 14px;
+    margin-bottom: 0;
+    border: 1px solid var(--card-border);
+    background: var(--bg-soft);
+    color: var(--text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: inherit;
 }
 .styleForm input:focus {
-	outline: none;
-	border: 2px solid crimson;
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
-
-.buttonChange{
-	display: block;
-	background: crimson;
-	font-weight: 600;
-	font-family: 'Open Sans', sans-serif;
-	border: none;
-	cursor: pointer;
-    margin: auto;
-	width: 85%;
-	padding: 10px;
-	border-radius: 5px;
-	color: #fff;
-	font-size: 16px;
-	transition: .3s ease all;
+.buttonChange {
+    display: block;
+    background: var(--accent);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin: 24px auto 0;
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s ease;
 }
 
 .buttonChange:hover {
-	background: rgb(124, 11, 33);
+    background: var(--accent-light);
+    transform: translateY(-1px);
 }
 
 .buttonChange:active {
-	scale: .9;
-    transition: all .4;
+    transform: scale(0.98);
 }
