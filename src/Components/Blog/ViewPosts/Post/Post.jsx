@@ -4,11 +4,12 @@ import notFound from "../../../../Assets/img/notFound.png"
 import "./post.css"
 
 const PLACEHOLDER = "https://picsum.photos/seed/itnoticias/1200/600";
-const Post = ({ id, title, summary, picture, content, category }) => {
-    const [imgSrc, setImgSrc] = useState(picture || PLACEHOLDER);
+const Post = ({ id, title, summary, picture, image, photo, url, content, category }) => {
+    const [imgSrc, setImgSrc] = useState(picture || image || photo || url || PLACEHOLDER);
 
     const handleImageError = () => {
-        setImgSrc(notFound);
+        if (imgSrc !== PLACEHOLDER) setImgSrc(PLACEHOLDER);
+        else setImgSrc(notFound);
     };
 
 
