@@ -2,16 +2,19 @@
 
 Blog de noticias y tutoriales del mundo IT (IA, hardware, seguridad, internet, desarrollo). Frontend en React + Vite, datos en Firebase (Firestore + Storage + Auth). Desarrollado por Statim Software.
 
-## ¿Tiene backend propio?
+## Arquitectura (frontend / backend / storage)
 
-**No.** Este proyecto no tiene backend propio. Toda la persistencia, autenticación y almacenamiento de imágenes se resuelve con **Firebase** (BaaS):
+Este proyecto ahora tiene una arquitectura separada:
 
-- **Base de datos:** Firebase Firestore (colección `posts`).
-- **Autenticación:** Firebase Authentication (solo el admin puede crear posts).
-- **Storage:** Firebase Storage (`picturesPosts/`) para las imágenes de los posts.
-- **Hosting frontend:** Netlify (deploy automático desde GitHub, rama main).
+- **Frontend:** React + Vite, deploy en **Netlify** (deploy automático desde GitHub, rama main).
+- **Backend:** Fastify + TypeScript + Prisma (SQLite/Postgres), deploy en **Render**. Se encarga de:
+  - Autenticación con JWT en cookie httpOnly (secure en prod, sameSite).
+  - Rate limiting: max 15 intentos por IP, bloqueo de 6 horas.
+  - Endpoints: `/api/auth/register`, `/api/auth/login`, `/api/auth/logout`, `/api/auth/me`, `/api/health`.
+- **Storage / DB de posts:** Firebase (Firestore para posts, Firebase Storage para imágenes, Firebase Auth legacy para admin).
+- **URL backend (Render):** configurar en Netlify como `VITE_BACKEND_URL`.
 
-No hay servidor Node/Python propio; el frontend habla directo con Firebase.
+El frontend habla con el backend para auth y con Firebase para posts/imágenes.
 
 ## Estructura
 
@@ -56,6 +59,17 @@ Configurar en Netlify → Site settings → Environment variables (prefijo VITE_
 - `VITE_APP_ID`
 - `VITE_MEASURE_REMENT_ID`
 - `VITE_API_CREATE_POST` (TinyMCE API key)
+- `VITE_BACKEND_URL` (URL del backend en Render, ej. `https://blog-backend.onrender.com`)
+
+## Variables de entorno (Render — backend)
+
+- `DATABASE_URL` (Postgres de Render o `file:./dev.db` para SQLite local)
+- `JWT_SECRET` (string largo aleatorio)
+- `FRONTEND_URL` (URL de Netlify, ej. `https://itnoticias.netlify.app`)
+- `ADMIN_EMAIL` (email del admin)
+- `ADMIN_PASSWORD` (password del admin)
+- `NODE_ENV=production`
+- `PORT` (Render lo setea automáticamente)
 
 ## Desarrollo local
 
